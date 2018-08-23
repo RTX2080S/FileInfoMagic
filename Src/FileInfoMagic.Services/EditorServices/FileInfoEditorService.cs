@@ -1,5 +1,6 @@
 ﻿using FileInfoMagic.Services.Interfaces;
 using System;
+using System.IO;
 
 namespace FileInfoMagic.Services.EditorServices
 {
@@ -7,32 +8,32 @@ namespace FileInfoMagic.Services.EditorServices
     {
         public DateTime GetCreationTime(string path)
         {
-            throw new NotImplementedException();
+            return File.GetCreationTime(path);
         }
 
         public DateTime GetLastAccessTime(string path)
         {
-            throw new NotImplementedException();
+            return File.GetLastAccessTime(path);
         }
 
         public DateTime GetLastWriteTime(string path)
         {
-            throw new NotImplementedException();
+            return File.GetLastWriteTime(path);
         }
 
         public void SetCreationTime(string path, DateTime creationTime)
         {
-            throw new NotImplementedException();
+            File.SetCreationTime(path, creationTime);
         }
 
         public void SetLastAccessTime(string path, DateTime lastAccessTime)
         {
-            throw new NotImplementedException();
+            File.SetLastAccessTime(path, lastAccessTime);
         }
 
         public void SetLastWriteTime(string path, DateTime lastWriteTime)
         {
-            throw new NotImplementedException();
+            File.SetLastWriteTime(path, lastWriteTime);
         }
     }
 }
