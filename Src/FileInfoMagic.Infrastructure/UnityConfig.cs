@@ -4,6 +4,7 @@ using Alienlab.Practices.Utilities;
 using FileInfoMagic.Infrastructure.Factories;
 using FileInfoMagic.Services.Interfaces;
 using Unity;
+using Unity.Lifetime;
 
 namespace FileInfoMagic.Infrastructure
 {
@@ -43,7 +44,7 @@ namespace FileInfoMagic.Infrastructure
             // container.LoadConfiguration();
 
             // Register your type's mappings here.
-            container.RegisterType<IEventAggregator, EventAggregator>();
+            container.RegisterType<IEventAggregator, EventAggregator>(new ContainerControlledLifetimeManager());
             container.RegisterType<IServiceFactory<IDialogService>, DialogServiceFactory>();
             container.RegisterType<IServiceFactory<IEditorService>, EditorServiceFactory>();
         }
