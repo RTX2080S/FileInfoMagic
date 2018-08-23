@@ -41,10 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DirectoryDialogService.cs" />
-    <Compile Include="FileDialogService.cs" />
+    <Compile Include="DialogServices\DirectoryDialogService.cs" />
+    <Compile Include="DialogServices\FileDialogService.cs" />
+    <Compile Include="EditorServices\DirectoryInfoEditorService.cs" />
+    <Compile Include="EditorServices\FileInfoEditorService.cs" />
     <Compile Include="Interfaces\IDialogService.cs" />
+    <Compile Include="Interfaces\IEditorService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

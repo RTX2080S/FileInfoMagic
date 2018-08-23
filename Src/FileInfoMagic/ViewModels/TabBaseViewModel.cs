@@ -12,15 +12,21 @@ namespace FileInfoMagic.ViewModels
     {
         private readonly IServiceFactory<IDialogService> dialogServiceFactory;
 
+        private readonly IServiceFactory<IEditorService> editorServiceFactory;
+
         private readonly IDialogService dialogService;
 
-        public abstract string TabName { get; }
+        private readonly IEditorService editorService;
 
         public TabBaseViewModel()
         {
             dialogServiceFactory = UnityConfig.Container.Resolve<IServiceFactory<IDialogService>>();
+            editorServiceFactory = UnityConfig.Container.Resolve<IServiceFactory<IEditorService>>();
             dialogService = dialogServiceFactory.Resolve(this.TabName);
+            editorService = editorServiceFactory.Resolve(this.TabName);
         }
+
+        public abstract string TabName { get; }
 
         private string targetPath;
 

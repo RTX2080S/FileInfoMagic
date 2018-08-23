@@ -43,6 +43,7 @@ namespace FileInfoMagic.Infrastructure
 
             // Register your type's mappings here.
             container.RegisterType<IServiceFactory<IDialogService>, DialogServiceFactory>();
+            container.RegisterType<IServiceFactory<IEditorService>, EditorServiceFactory>();
         }
     }
 }

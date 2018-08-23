@@ -1,7 +1,7 @@
 ﻿using FileInfoMagic.Services.Interfaces;
 using System.Windows.Forms;
 
-namespace FileInfoMagic.Services
+namespace FileInfoMagic.Services.DialogServices
 {
     public class DirectoryDialogService : IDialogService
     {

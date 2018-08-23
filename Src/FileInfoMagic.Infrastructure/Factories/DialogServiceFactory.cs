@@ -1,5 +1,5 @@
 ﻿using Alienlab.Framework.Design;
-using FileInfoMagic.Services;
+using FileInfoMagic.Services.DialogServices;
 using FileInfoMagic.Services.Interfaces;
 
 namespace FileInfoMagic.Infrastructure.Factories
