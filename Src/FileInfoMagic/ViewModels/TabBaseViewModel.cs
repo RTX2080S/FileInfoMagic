@@ -165,7 +165,7 @@ namespace FileInfoMagic.ViewModels
                     editorService.SetLastWriteTime(selectedPath, modifiedTime);
                 if (DateTime.TryParse(AccessedDateTime, out DateTime accessedTime))
                     editorService.SetLastAccessTime(selectedPath, accessedTime);
-                MessageBox.Show($"Saved to {selectedPath}.", WinForm.Application.ProductName, MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show($"Changes saved to {TabName} {selectedPath}.", WinForm.Application.ProductName, MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
