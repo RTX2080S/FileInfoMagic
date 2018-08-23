@@ -159,13 +159,20 @@ namespace FileInfoMagic.ViewModels
         {
             if (!string.IsNullOrWhiteSpace(selectedPath) && editorService.Exists(selectedPath))
             {
-                if (DateTime.TryParse(CreatedDateTime, out DateTime creationTime))
-                    editorService.SetCreationTime(selectedPath, creationTime);
-                if (DateTime.TryParse(ModifiedDateTime, out DateTime modifiedTime))
-                    editorService.SetLastWriteTime(selectedPath, modifiedTime);
-                if (DateTime.TryParse(AccessedDateTime, out DateTime accessedTime))
-                    editorService.SetLastAccessTime(selectedPath, accessedTime);
-                MessageBox.Show($"Changes saved to {TabName} {selectedPath}.", WinForm.Application.ProductName, MessageBoxButton.OK, MessageBoxImage.Information);
+                try
+                {
+                    if (DateTime.TryParse(CreatedDateTime, out DateTime creationTime))
+                        editorService.SetCreationTime(selectedPath, creationTime);
+                    if (DateTime.TryParse(ModifiedDateTime, out DateTime modifiedTime))
+                        editorService.SetLastWriteTime(selectedPath, modifiedTime);
+                    if (DateTime.TryParse(AccessedDateTime, out DateTime accessedTime))
+                        editorService.SetLastAccessTime(selectedPath, accessedTime);
+                    MessageBox.Show($"Changes saved to {TabName} {selectedPath}.", WinForm.Application.ProductName, MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error while saving to {selectedPath}.\n{ex.Message}", WinForm.Application.ProductName, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 
