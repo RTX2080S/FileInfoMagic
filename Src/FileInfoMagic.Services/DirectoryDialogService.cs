@@ -1,4 +1,5 @@
 ﻿using FileInfoMagic.Services.Interfaces;
+using System.Windows.Forms;
 
 namespace FileInfoMagic.Services
 {
@@ -6,7 +7,12 @@ namespace FileInfoMagic.Services
     {
         public string BrowsePath()
         {
-            return "Dir";
+            using (FolderBrowserDialog openDialog = new FolderBrowserDialog())
+            {
+                openDialog.Description = "Browse Folder";
+                openDialog.ShowDialog();
+                return openDialog.SelectedPath;
+            }
         }
     }
 }
