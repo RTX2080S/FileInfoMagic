@@ -1,8 +1,8 @@
-﻿using Alienlab.WPF.ViewModels;
-
+﻿
 namespace FileInfoMagic.ViewModels
 {
-    public class DirectoryTabViewModel : ViewModelBase
+    public class DirectoryTabViewModel : TabBaseViewModel
     {
+        public override string TabName => "Directory";
     }
 }

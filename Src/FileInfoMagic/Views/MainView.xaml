@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:FileInfoMagic.Views"
              xmlns:vm="clr-namespace:FileInfoMagic.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300"
              DataContext="{DynamicResource MainViewModel}">
     <UserControl.Resources>
         <vm:MainViewModel x:Key="MainViewModel" />
