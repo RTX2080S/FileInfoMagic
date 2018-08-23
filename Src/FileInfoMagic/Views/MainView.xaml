@@ -13,6 +13,13 @@
     </UserControl.Resources>
 
     <Grid>
-
+        <TabControl Margin="10">
+            <TabItem Header="File">
+                <local:FileTabView Margin="6" />
+            </TabItem>
+            <TabItem Header="Directory">
+                <local:DirectoryTabView Margin="6" />
+            </TabItem>
+        </TabControl>
     </Grid>
 </UserControl>

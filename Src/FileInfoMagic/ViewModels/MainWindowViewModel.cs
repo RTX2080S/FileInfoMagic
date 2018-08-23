@@ -5,6 +5,6 @@ namespace FileInfoMagic.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        public string WindowTitle => WinForm.Application.ProductName;
+        public string WindowTitle => $"{WinForm.Application.ProductName} [Version {WinForm.Application.ProductVersion}]";
     }
 }
