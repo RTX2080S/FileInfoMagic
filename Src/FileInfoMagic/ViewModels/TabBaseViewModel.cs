@@ -1,8 +1,10 @@
 ﻿using Alienlab.Framework.Design;
 using Alienlab.WPF.Helpers;
+using Alienlab.Practices.Utilities;
 using FileInfoMagic.Infrastructure;
 using FileInfoMagic.Services.Interfaces;
 using FileInfoMagic.Infrastructure.ViewModels;
+using FileInfoMagic.Models;
 using System;
 using System.Windows;
 using System.Windows.Input;
@@ -11,7 +13,7 @@ using Unity;
 
 namespace FileInfoMagic.ViewModels
 {
-    public abstract class TabBaseViewModel : CommonViewModel
+    public abstract class TabBaseViewModel : CommonViewModel, ISubscriber<FileDroppedEventArgs>
     {
         private readonly IServiceFactory<IDialogService> dialogServiceFactory;
 
@@ -165,6 +167,13 @@ namespace FileInfoMagic.ViewModels
                     editorService.SetLastAccessTime(selectedPath, accessedTime);
                 MessageBox.Show($"Saved to {selectedPath}.", WinForm.Application.ProductName, MessageBoxButton.OK, MessageBoxImage.Information);
             }
+        }
+
+        public void OnEventHandler(FileDroppedEventArgs e)
+        {
+            var firstFile = e.FileDropList[0];
+            if (editorService.Exists(firstFile))
+                this.LoadPath(firstFile);
         }
     }
 }

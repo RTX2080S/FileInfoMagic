@@ -1,8 +1,11 @@
-﻿using FileInfoMagic.Infrastructure.ViewModels;
+﻿using Alienlab.Practices.Utilities;
+using FileInfoMagic.Infrastructure.ViewModels;
+using FileInfoMagic.Models;
+using System.IO;
 
 namespace FileInfoMagic.ViewModels
 {
-    public class MainViewModel : CommonViewModel
+    public class MainViewModel : CommonViewModel, ISubscriber<FileDroppedEventArgs>
     {
         private int tabIndex;
 
@@ -17,6 +20,15 @@ namespace FileInfoMagic.ViewModels
                 tabIndex = value;
                 OnPropertyChanged(nameof(TabIndex));
             }
+        }
+
+        public void OnEventHandler(FileDroppedEventArgs e)
+        {
+            var firstFile = e.FileDropList[0];
+            if (!string.IsNullOrWhiteSpace(firstFile) && File.Exists(firstFile))
+                TabIndex = 0;
+            else if (!string.IsNullOrWhiteSpace(firstFile) && Directory.Exists(firstFile))
+                TabIndex = 1;
         }
     }
 }
