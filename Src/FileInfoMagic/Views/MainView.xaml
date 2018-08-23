@@ -30,7 +30,10 @@
                     ContentTemplateSelector="{StaticResource tabTemplateSelector}">
             <TabControl.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Focusable="True" FocusManager.IsFocusScope="True" Text="{Binding TabHeader}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Focusable="True" FocusManager.IsFocusScope="True" Text="{Binding TabHeader}"/>
+                        <Button Margin="5,0,0,0" Command="{Binding CloseCommand}">X</Button>
+                    </StackPanel>
                 </DataTemplate>
             </TabControl.ItemTemplate>
         </TabControl>
