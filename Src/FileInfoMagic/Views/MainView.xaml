@@ -30,7 +30,7 @@
                     ContentTemplateSelector="{StaticResource tabTemplateSelector}">
             <TabControl.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Focusable="True" FocusManager.IsFocusScope="True" Text="{Binding TabName}"/>
+                    <TextBlock Focusable="True" FocusManager.IsFocusScope="True" Text="{Binding TabHeader}"/>
                 </DataTemplate>
             </TabControl.ItemTemplate>
         </TabControl>

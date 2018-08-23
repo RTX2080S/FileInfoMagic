@@ -11,8 +11,8 @@ namespace FileInfoMagic.ViewModels
         public MainViewModel()
         {
             TabPages = new ObservableCollection<TabBaseViewModel>();
-            TabPages.Add(new FileTabViewModel());
-            TabPages.Add(new DirectoryTabViewModel());
+            this.AddTab(new FileTabViewModel(this));
+            this.AddTab(new DirectoryTabViewModel(this));
         }
 
         private ObservableCollection<TabBaseViewModel> tabPages;
@@ -45,13 +45,35 @@ namespace FileInfoMagic.ViewModels
             }
         }
 
+        public void AddTab(TabBaseViewModel tab)
+        {
+            if (tab != null)
+                TabPages.Add(tab);
+        }
+
+        public void RemoveTab(TabBaseViewModel tab)
+        {
+            if (tab != null)
+                TabPages.Remove(tab);
+        }
+
         public void OnEventHandler(FileDroppedEventArgs e)
         {
             var firstFile = e.FileDropList[0];
             if (!string.IsNullOrWhiteSpace(firstFile) && File.Exists(firstFile))
-                TabIndex = 0;
+            {
+                var fileTab = new FileTabViewModel(this);
+                fileTab.LoadPath(firstFile);
+                this.AddTab(fileTab);
+                TabIndex = TabPages.Count - 1;
+            }
             else if (!string.IsNullOrWhiteSpace(firstFile) && Directory.Exists(firstFile))
-                TabIndex = 1;
+            {
+                var dirTab = new DirectoryTabViewModel(this);
+                dirTab.LoadPath(firstFile);
+                this.AddTab(dirTab);
+                TabIndex = TabPages.Count - 1;
+            }
         }
     }
 }

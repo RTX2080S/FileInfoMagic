@@ -11,6 +11,11 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Resources/TabStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="ControlButton" TargetType="Button">
+                <Setter Property="MaxWidth" Value="100"></Setter>
+                <Setter Property="Padding" Value="16,5,16,5"></Setter>
+            </Style>
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -73,22 +78,26 @@
             </TextBox.Text>
         </TextBox>
 
-        <Button Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="4" MaxWidth="100" Padding="16,5,16,5" Content="Save" Command="{Binding SaveCommand}">
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="IsEnabled" Value="false" />
-                    <Style.Triggers>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding ElementName=CreatedDateTimeTextBox, Path=(Validation.HasError)}" Value="false" />
-                                <Condition Binding="{Binding ElementName=ModifiedDateTimeTextBox, Path=(Validation.HasError)}" Value="false" />
-                                <Condition Binding="{Binding ElementName=AccessedDateTimeTextBox, Path=(Validation.HasError)}" Value="false" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter Property="IsEnabled" Value="true" />
-                        </MultiDataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
-        </Button>
+        <StackPanel Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Right" >
+            <Button Margin="5" Content="Save" Command="{Binding SaveCommand}">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ControlButton}">
+                        <Setter Property="IsEnabled" Value="false" />
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding ElementName=CreatedDateTimeTextBox, Path=(Validation.HasError)}" Value="false" />
+                                    <Condition Binding="{Binding ElementName=ModifiedDateTimeTextBox, Path=(Validation.HasError)}" Value="false" />
+                                    <Condition Binding="{Binding ElementName=AccessedDateTimeTextBox, Path=(Validation.HasError)}" Value="false" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="IsEnabled" Value="true" />
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Button Style="{StaticResource ControlButton}" Margin="5" Content="Close" Command="{Binding CloseCommand}" />
+        </StackPanel>
     </Grid>
 </UserControl>

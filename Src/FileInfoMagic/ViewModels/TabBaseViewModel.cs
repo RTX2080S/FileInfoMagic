@@ -1,11 +1,10 @@
 ﻿using Alienlab.Framework.Design;
 using Alienlab.WPF.Helpers;
-using Alienlab.Practices.Utilities;
 using FileInfoMagic.Infrastructure;
 using FileInfoMagic.Services.Interfaces;
 using FileInfoMagic.Infrastructure.ViewModels;
-using FileInfoMagic.Models;
 using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using WinForm = System.Windows.Forms;
@@ -13,7 +12,7 @@ using Unity;
 
 namespace FileInfoMagic.ViewModels
 {
-    public abstract class TabBaseViewModel : CommonViewModel, ISubscriber<FileDroppedEventArgs>
+    public abstract class TabBaseViewModel : CommonViewModel
     {
         private readonly IServiceFactory<IDialogService> dialogServiceFactory;
 
@@ -23,8 +22,11 @@ namespace FileInfoMagic.ViewModels
 
         private readonly IEditorService editorService;
 
-        public TabBaseViewModel()
+        public CommonViewModel ParentViewModel { get; }
+
+        public TabBaseViewModel(CommonViewModel Parent)
         {
+            this.ParentViewModel = Parent;
             dialogServiceFactory = UnityConfig.Container.Resolve<IServiceFactory<IDialogService>>();
             editorServiceFactory = UnityConfig.Container.Resolve<IServiceFactory<IEditorService>>();
             dialogService = dialogServiceFactory.Resolve(this.TabName);
@@ -32,6 +34,22 @@ namespace FileInfoMagic.ViewModels
         }
 
         public abstract string TabName { get; }
+
+        private string tabHeader;
+
+        public string TabHeader
+        {
+            get
+            {
+                var header = string.IsNullOrWhiteSpace(tabHeader) ? TabName : tabHeader;
+                return header;
+            }
+            set
+            {
+                tabHeader = value;
+                OnPropertyChanged(nameof(TabHeader));
+            }
+        }
 
         public string PathLabel => $"{TabName} Path";
 
@@ -128,7 +146,7 @@ namespace FileInfoMagic.ViewModels
             }
         }
 
-        protected void LoadPath(string selectedPath)
+        public void LoadPath(string selectedPath)
         {
             if (!string.IsNullOrWhiteSpace(selectedPath) && editorService.Exists(selectedPath))
             {
@@ -136,6 +154,7 @@ namespace FileInfoMagic.ViewModels
                 CreatedDateTime = editorService.GetCreationTime(selectedPath).ToString();
                 ModifiedDateTime = editorService.GetLastWriteTime(selectedPath).ToString();
                 AccessedDateTime = editorService.GetLastAccessTime(selectedPath).ToString();
+                TabHeader = $"{Path.GetFileName(selectedPath)} - {TabName}";
             }
         }
 
@@ -155,7 +174,7 @@ namespace FileInfoMagic.ViewModels
             }
         }
 
-        protected void SavePath(string selectedPath)
+        public void SavePath(string selectedPath)
         {
             if (!string.IsNullOrWhiteSpace(selectedPath) && editorService.Exists(selectedPath))
             {
@@ -176,11 +195,21 @@ namespace FileInfoMagic.ViewModels
             }
         }
 
-        public void OnEventHandler(FileDroppedEventArgs e)
+        private ICommand closeCommand;
+
+        private void executeCloseCommand()
         {
-            var firstFile = e.FileDropList[0];
-            if (editorService.Exists(firstFile))
-                this.LoadPath(firstFile);
+            var parentVM = this.ParentViewModel as MainViewModel;
+            parentVM.RemoveTab(this);
+        }
+
+        public ICommand CloseCommand
+        {
+            get
+            {
+                closeCommand = closeCommand ?? new RelayCommand(param => executeCloseCommand());
+                return closeCommand;
+            }
         }
     }
 }
