@@ -41,7 +41,7 @@
         <Button Grid.Row="1" Grid.Column="3" Padding="16,5,16,5" Margin="5,0,5,0" Command="{Binding LoadCommand}" Content="Load" />
 
         <TextBlock Grid.Row="3" Grid.Column="0" Style="{StaticResource LabelStyle}">Created</TextBlock>
-        <TextBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3">
+        <TextBox x:Name="CreatedDateTimeTextBox" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3">
             <TextBox.Text>
                 <Binding Path="CreatedDateTime" UpdateSourceTrigger="PropertyChanged" >
                     <Binding.ValidationRules>
@@ -52,7 +52,7 @@
         </TextBox>
 
         <TextBlock Grid.Row="5" Grid.Column="0" Style="{StaticResource LabelStyle}">Modified</TextBlock>
-        <TextBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3">
+        <TextBox x:Name="ModifiedDateTimeTextBox" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3">
             <TextBox.Text>
                 <Binding Path="ModifiedDateTime" UpdateSourceTrigger="PropertyChanged" >
                     <Binding.ValidationRules>
@@ -63,7 +63,7 @@
         </TextBox>
 
         <TextBlock Grid.Row="7" Grid.Column="0" Style="{StaticResource LabelStyle}">Accessed</TextBlock>
-        <TextBox Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3">
+        <TextBox x:Name="AccessedDateTimeTextBox" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3">
             <TextBox.Text>
                 <Binding Path="AccessedDateTime" UpdateSourceTrigger="PropertyChanged" >
                     <Binding.ValidationRules>
@@ -73,6 +73,22 @@
             </TextBox.Text>
         </TextBox>
 
-        <Button Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="4" MaxWidth="100" Padding="16,5,16,5" Content="Save" />
+        <Button Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="4" MaxWidth="100" Padding="16,5,16,5" Content="Save" Command="{Binding SaveCommand}">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="IsEnabled" Value="false" />
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ElementName=CreatedDateTimeTextBox, Path=(Validation.HasError)}" Value="false" />
+                                <Condition Binding="{Binding ElementName=ModifiedDateTimeTextBox, Path=(Validation.HasError)}" Value="false" />
+                                <Condition Binding="{Binding ElementName=AccessedDateTimeTextBox, Path=(Validation.HasError)}" Value="false" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="true" />
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
     </Grid>
 </UserControl>

@@ -3,7 +3,10 @@ using Alienlab.WPF.Helpers;
 using Alienlab.WPF.ViewModels;
 using FileInfoMagic.Infrastructure;
 using FileInfoMagic.Services.Interfaces;
+using System;
+using System.Windows;
 using System.Windows.Input;
+using WinForm = System.Windows.Forms;
 using Unity;
 
 namespace FileInfoMagic.ViewModels
@@ -131,6 +134,36 @@ namespace FileInfoMagic.ViewModels
                 CreatedDateTime = editorService.GetCreationTime(selectedPath).ToString();
                 ModifiedDateTime = editorService.GetLastWriteTime(selectedPath).ToString();
                 AccessedDateTime = editorService.GetLastAccessTime(selectedPath).ToString();
+            }
+        }
+
+        private ICommand saveCommand;
+
+        private void executeSaveCommand()
+        {
+            this.SavePath(TargetPath);
+        }
+
+        public ICommand SaveCommand
+        {
+            get
+            {
+                saveCommand = saveCommand ?? new RelayCommand(param => executeSaveCommand());
+                return saveCommand;
+            }
+        }
+
+        protected void SavePath(string selectedPath)
+        {
+            if (!string.IsNullOrWhiteSpace(selectedPath) && editorService.Exists(selectedPath))
+            {
+                if (DateTime.TryParse(CreatedDateTime, out DateTime creationTime))
+                    editorService.SetCreationTime(selectedPath, creationTime);
+                if (DateTime.TryParse(ModifiedDateTime, out DateTime modifiedTime))
+                    editorService.SetLastWriteTime(selectedPath, modifiedTime);
+                if (DateTime.TryParse(AccessedDateTime, out DateTime accessedTime))
+                    editorService.SetLastAccessTime(selectedPath, accessedTime);
+                MessageBox.Show($"Saved to {selectedPath}.", WinForm.Application.ProductName, MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }
