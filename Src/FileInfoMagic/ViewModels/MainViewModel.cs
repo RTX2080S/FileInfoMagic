@@ -1,12 +1,35 @@
 ﻿using Alienlab.Practices.Utilities;
 using FileInfoMagic.Infrastructure.ViewModels;
 using FileInfoMagic.Models;
+using System.Collections.ObjectModel;
 using System.IO;
 
 namespace FileInfoMagic.ViewModels
 {
     public class MainViewModel : CommonViewModel, ISubscriber<FileDroppedEventArgs>
     {
+        public MainViewModel()
+        {
+            TabPages = new ObservableCollection<TabBaseViewModel>();
+            TabPages.Add(new FileTabViewModel());
+            TabPages.Add(new DirectoryTabViewModel());
+        }
+
+        private ObservableCollection<TabBaseViewModel> tabPages;
+
+        public ObservableCollection<TabBaseViewModel> TabPages
+        {
+            get
+            {
+                return tabPages;
+            }
+            set
+            {
+                tabPages = value;
+                OnPropertyChanged(nameof(TabPages));
+            }
+        }
+
         private int tabIndex;
 
         public int TabIndex

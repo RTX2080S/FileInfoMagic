@@ -102,6 +102,7 @@
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\TabBaseViewModel.cs" />
     <Compile Include="ValidationRules\DateTimeValidationRule.cs" />
+    <Compile Include="ViewModels\TabPageTemplateSelector.cs" />
     <Compile Include="Views\DirectoryTabView.xaml.cs">
       <DependentUpon>DirectoryTabView.xaml</DependentUpon>
     </Compile>

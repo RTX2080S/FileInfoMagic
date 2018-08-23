@@ -9,16 +9,30 @@
              DataContext="{DynamicResource MainViewModel}">
     <UserControl.Resources>
         <vm:MainViewModel x:Key="MainViewModel" />
+
+        <vm:TabPageTemplateSelector x:Key="tabTemplateSelector">
+            <vm:TabPageTemplateSelector.FileTabTemplate>
+                <DataTemplate>
+                    <local:FileTabView />
+                </DataTemplate>
+            </vm:TabPageTemplateSelector.FileTabTemplate>
+
+            <vm:TabPageTemplateSelector.DirectoryTabTemplate>
+                <DataTemplate>
+                    <local:DirectoryTabView />
+                </DataTemplate>
+            </vm:TabPageTemplateSelector.DirectoryTabTemplate>
+        </vm:TabPageTemplateSelector>
     </UserControl.Resources>
 
     <Grid>
-        <TabControl Margin="10" SelectedIndex="{Binding TabIndex}">
-            <TabItem Header="File">
-                <local:FileTabView Margin="6" />
-            </TabItem>
-            <TabItem Header="Directory">
-                <local:DirectoryTabView Margin="6" />
-            </TabItem>
+        <TabControl Margin="10" ItemsSource="{Binding TabPages}" SelectedIndex="{Binding TabIndex}"
+                    ContentTemplateSelector="{StaticResource tabTemplateSelector}">
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Focusable="True" FocusManager.IsFocusScope="True" Text="{Binding TabName}"/>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
         </TabControl>
     </Grid>
 </UserControl>

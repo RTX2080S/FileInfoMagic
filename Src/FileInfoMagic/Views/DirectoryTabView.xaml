@@ -4,19 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FileInfoMagic.Views"
-             xmlns:vm="clr-namespace:FileInfoMagic.ViewModels"
              mc:Ignorable="d">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Resources/TabStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
-            <vm:DirectoryTabViewModel x:Key="DirViewModel" />
         </ResourceDictionary>
     </UserControl.Resources>
 
     <Grid>
-        <local:TabBaseView DataContext="{DynamicResource DirViewModel}" />
+        <local:TabBaseView />
     </Grid>
 </UserControl>

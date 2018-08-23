@@ -3,20 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:FileInfoMagic.Views"             
-             xmlns:vm="clr-namespace:FileInfoMagic.ViewModels"
+             xmlns:local="clr-namespace:FileInfoMagic.Views"
              mc:Ignorable="d">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Resources/TabStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
-            <vm:FileTabViewModel x:Key="FileViewModel" />
         </ResourceDictionary>
     </UserControl.Resources>
 
     <Grid>
-        <local:TabBaseView DataContext="{DynamicResource FileViewModel}" />
+        <local:TabBaseView />
     </Grid>
 </UserControl>
