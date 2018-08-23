@@ -7,7 +7,8 @@
         xmlns:vm="clr-namespace:FileInfoMagic.ViewModels"
         xmlns:views="clr-namespace:FileInfoMagic.Views"        
         mc:Ignorable="d"
-        Title="{Binding WindowTitle}" Height="350" Width="525" DataContext="{DynamicResource WindowViewModel}">
+        Title="{Binding WindowTitle}" MinHeight="300" MinWidth="500" Width="500" Height="300"
+        DataContext="{DynamicResource WindowViewModel}">
     <Window.Resources>
         <vm:MainWindowViewModel x:Key="WindowViewModel" />
     </Window.Resources>
