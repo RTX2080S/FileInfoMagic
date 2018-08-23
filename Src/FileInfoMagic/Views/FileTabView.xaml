@@ -6,28 +6,18 @@
              xmlns:local="clr-namespace:FileInfoMagic.Views"             
              xmlns:vm="clr-namespace:FileInfoMagic.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300"
-             DataContext="{DynamicResource FileViewModel}">
+             d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <vm:FileTabViewModel x:Key="FileViewModel" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/TabStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <vm:FileTabViewModel x:Key="FileViewModel" />
+        </ResourceDictionary>
     </UserControl.Resources>
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-        </Grid.RowDefinitions>
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-
-        <TextBlock Grid.Row="0" Grid.Column="0" Padding="6" VerticalAlignment="Center">File Path</TextBlock>
-        <TextBox Grid.Row="0" Grid.Column="1" MaxHeight="30" Text="{Binding TargetPath}"></TextBox>
-        <Button Grid.Row="0" Grid.Column="2" MaxHeight="30" Padding="10,5,10,5" Command="{Binding BrowseCommand}">Browse</Button>
+        <local:TabBaseView DataContext="{DynamicResource FileViewModel}" />
     </Grid>
 </UserControl>

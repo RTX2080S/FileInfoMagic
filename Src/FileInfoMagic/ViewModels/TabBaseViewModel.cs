@@ -28,6 +28,8 @@ namespace FileInfoMagic.ViewModels
 
         public abstract string TabName { get; }
 
+        public string PathLabel => $"{TabName} Path";
+
         private string targetPath;
 
         public string TargetPath
@@ -43,11 +45,57 @@ namespace FileInfoMagic.ViewModels
             }
         }
 
+        private string createdDateTime;
+
+        public string CreatedDateTime
+        {
+            get
+            {
+                return createdDateTime;
+            }
+            set
+            {
+                createdDateTime = value;
+                OnPropertyChanged(nameof(CreatedDateTime));
+            }
+        }
+
+        private string modifiedDateTime;
+
+        public string ModifiedDateTime
+        {
+            get
+            {
+                return modifiedDateTime;
+            }
+            set
+            {
+                modifiedDateTime = value;
+                OnPropertyChanged(nameof(ModifiedDateTime));
+            }
+        }
+
+        private string accessedDateTime;
+
+        public string AccessedDateTime
+        {
+            get
+            {
+                return accessedDateTime;
+            }
+            set
+            {
+                accessedDateTime = value;
+                OnPropertyChanged(nameof(AccessedDateTime));
+            }
+        }
+
         private ICommand browseCommand;
 
         private void executeBrowseCommand()
         {
-            TargetPath = dialogService.BrowsePath();
+            var selectedPath = dialogService.BrowsePath();
+            this.LoadPath(selectedPath);
         }
 
         public ICommand BrowseCommand
@@ -56,6 +104,33 @@ namespace FileInfoMagic.ViewModels
             {
                 browseCommand = browseCommand ?? new RelayCommand(param => executeBrowseCommand(), param => true);
                 return browseCommand;
+            }
+        }
+
+        private ICommand loadCommand;
+
+        private void executeLoadCommand()
+        {
+            this.LoadPath(TargetPath);
+        }
+
+        public ICommand LoadCommand
+        {
+            get
+            {
+                loadCommand = loadCommand ?? new RelayCommand(param => executeLoadCommand(), param => true);
+                return loadCommand;
+            }
+        }
+
+        protected void LoadPath(string selectedPath)
+        {
+            if (!string.IsNullOrWhiteSpace(selectedPath) && editorService.Exists(selectedPath))
+            {
+                TargetPath = selectedPath;
+                CreatedDateTime = editorService.GetCreationTime(selectedPath).ToString();
+                ModifiedDateTime = editorService.GetLastWriteTime(selectedPath).ToString();
+                AccessedDateTime = editorService.GetLastAccessTime(selectedPath).ToString();
             }
         }
     }

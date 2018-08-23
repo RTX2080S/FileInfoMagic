@@ -6,6 +6,11 @@ namespace FileInfoMagic.Services.EditorServices
 {
     public class FileInfoEditorService : IEditorService
     {
+        public bool Exists(string path)
+        {
+            return File.Exists(path);
+        }
+
         public DateTime GetCreationTime(string path)
         {
             return File.GetCreationTime(path);

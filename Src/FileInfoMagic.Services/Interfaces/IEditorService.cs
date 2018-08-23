@@ -4,6 +4,7 @@ namespace FileInfoMagic.Services.Interfaces
 {
     public interface IEditorService
     {
+        bool Exists(string path);
         DateTime GetCreationTime(string path);
         DateTime GetLastAccessTime(string path);
         DateTime GetLastWriteTime(string path);

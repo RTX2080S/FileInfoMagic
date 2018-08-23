@@ -6,6 +6,11 @@ namespace FileInfoMagic.Services.EditorServices
 {
     public class DirectoryInfoEditorService : IEditorService
     {
+        public bool Exists(string path)
+        {
+            return Directory.Exists(path);
+        }
+
         public DateTime GetCreationTime(string path)
         {
             return Directory.GetCreationTime(path);
