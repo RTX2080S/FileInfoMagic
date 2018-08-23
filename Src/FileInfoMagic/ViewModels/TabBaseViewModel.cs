@@ -1,8 +1,8 @@
 ﻿using Alienlab.Framework.Design;
 using Alienlab.WPF.Helpers;
-using Alienlab.WPF.ViewModels;
 using FileInfoMagic.Infrastructure;
 using FileInfoMagic.Services.Interfaces;
+using FileInfoMagic.Infrastructure.ViewModels;
 using System;
 using System.Windows;
 using System.Windows.Input;
@@ -11,7 +11,7 @@ using Unity;
 
 namespace FileInfoMagic.ViewModels
 {
-    public abstract class TabBaseViewModel : ViewModelBase
+    public abstract class TabBaseViewModel : CommonViewModel
     {
         private readonly IServiceFactory<IDialogService> dialogServiceFactory;
 

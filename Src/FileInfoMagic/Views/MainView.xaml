@@ -12,7 +12,7 @@
     </UserControl.Resources>
 
     <Grid>
-        <TabControl Margin="10">
+        <TabControl Margin="10" SelectedIndex="{Binding TabIndex}">
             <TabItem Header="File">
                 <local:FileTabView Margin="6" />
             </TabItem>

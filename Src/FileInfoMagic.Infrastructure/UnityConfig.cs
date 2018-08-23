@@ -1,5 +1,6 @@
 ﻿using System;
 using Alienlab.Framework.Design;
+using Alienlab.Practices.Utilities;
 using FileInfoMagic.Infrastructure.Factories;
 using FileInfoMagic.Services.Interfaces;
 using Unity;
@@ -42,6 +43,7 @@ namespace FileInfoMagic.Infrastructure
             // container.LoadConfiguration();
 
             // Register your type's mappings here.
+            container.RegisterType<IEventAggregator, EventAggregator>();
             container.RegisterType<IServiceFactory<IDialogService>, DialogServiceFactory>();
             container.RegisterType<IServiceFactory<IEditorService>, EditorServiceFactory>();
         }

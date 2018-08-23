@@ -41,6 +41,9 @@
     <Reference Include="Alienlab.Framework">
       <HintPath>..\..\Dependencies\Alienlab.Framework.dll</HintPath>
     </Reference>
+    <Reference Include="Alienlab.Practices">
+      <HintPath>..\..\Dependencies\Alienlab.Practices.dll</HintPath>
+    </Reference>
     <Reference Include="Alienlab.WPF">
       <HintPath>..\..\Dependencies\Alienlab.WPF.dll</HintPath>
     </Reference>
@@ -89,6 +92,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\FileDroppedEventArgs.cs" />
     <Compile Include="ViewModels\DirectoryTabViewModel.cs" />
     <Compile Include="ViewModels\FileTabViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />

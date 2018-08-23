@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FileInfoMagic.ViewModels;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace FileInfoMagic
 {
@@ -20,9 +8,17 @@ namespace FileInfoMagic
     /// </summary>
     public partial class MainWindow : Window
     {
+        protected MainWindowViewModel ViewModel => this.DataContext as MainWindowViewModel;
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_Drop(object sender, DragEventArgs e)
+        {
+            var dataObject = e.Data as DataObject;
+            ViewModel.OnFileDropped(dataObject);
         }
     }
 }
