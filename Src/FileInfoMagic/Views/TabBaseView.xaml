@@ -48,7 +48,7 @@
         <TextBlock Grid.Row="3" Grid.Column="0" Style="{StaticResource LabelStyle}">Created</TextBlock>
         <TextBox x:Name="CreatedDateTimeTextBox" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3">
             <TextBox.Text>
-                <Binding Path="CreatedDateTime" UpdateSourceTrigger="PropertyChanged" >
+                <Binding Path="CreatedDateTime" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <rules:DateTimeValidationRule />
                     </Binding.ValidationRules>
@@ -59,7 +59,7 @@
         <TextBlock Grid.Row="5" Grid.Column="0" Style="{StaticResource LabelStyle}">Modified</TextBlock>
         <TextBox x:Name="ModifiedDateTimeTextBox" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3">
             <TextBox.Text>
-                <Binding Path="ModifiedDateTime" UpdateSourceTrigger="PropertyChanged" >
+                <Binding Path="ModifiedDateTime" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <rules:DateTimeValidationRule />
                     </Binding.ValidationRules>
@@ -70,7 +70,7 @@
         <TextBlock Grid.Row="7" Grid.Column="0" Style="{StaticResource LabelStyle}">Accessed</TextBlock>
         <TextBox x:Name="AccessedDateTimeTextBox" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3">
             <TextBox.Text>
-                <Binding Path="AccessedDateTime" UpdateSourceTrigger="PropertyChanged" >
+                <Binding Path="AccessedDateTime" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <rules:DateTimeValidationRule />
                     </Binding.ValidationRules>

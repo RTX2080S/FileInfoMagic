@@ -183,17 +183,9 @@ namespace FileInfoMagic.ViewModels
             }
         }
 
-        protected bool CanSave()
-        {
-            return DateTimeHelper.IsValidDateTimeString(CreatedDateTime) &&
-                DateTimeHelper.IsValidDateTimeString(ModifiedDateTime) &&
-                DateTimeHelper.IsValidDateTimeString(AccessedDateTime);
-        }
-
         public void Save()
         {
-            if (this.CanSave())
-                this.SavePath(CurrentPath);
+            this.SavePath(CurrentPath);
         }
 
         protected void SavePath(string selectedPath)
