@@ -94,6 +94,12 @@ namespace FileInfoMagic.ViewModels
             }
         }
 
+        protected void AddDefaultTabs()
+        {
+            this.AddTab(new FileTabViewModel(this));
+            this.AddTab(new DirectoryTabViewModel(this));
+        }
+
         public void OnEventHandler(FileDroppedEventArgs e)
         {
             foreach (var file in e.FileDropList)
@@ -126,16 +132,15 @@ namespace FileInfoMagic.ViewModels
         public void OnEventHandler(WindowLoadedEventArgs e)
         {
             var startupArgs = Environment.GetCommandLineArgs();
-            if (startupArgs.Length <= 1)
-            {
-                this.AddTab(new FileTabViewModel(this));
-                this.AddTab(new DirectoryTabViewModel(this));
-            }
-            else
+            if (startupArgs.Length > 1)
             {
                 for (int i = 1; i < startupArgs.Length; i++)
                     this.TryLoadFileInNewTab(startupArgs[i]);
             }
+
+            // If nothing is loaded
+            if (TabPages.Count == 0)
+                this.AddDefaultTabs();
 
             eventAggregator.PublishEvent(new StatusUpdateEventArgs("Ready"));
         }
