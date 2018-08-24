@@ -11,6 +11,11 @@ namespace FileInfoMagic.ViewModels
     {
         public string WindowTitle => $"{WinForm.Application.ProductName} [Version {WinForm.Application.ProductVersion}]";
 
+        public void OnWindowLoaded()
+        {
+            eventAggregator.PublishEvent(new StatusUpdateEventArgs("Ready"));
+        }
+
         public void OnFileDropped(DataObject dataObject)
         {
             if (dataObject.ContainsFileDropList())

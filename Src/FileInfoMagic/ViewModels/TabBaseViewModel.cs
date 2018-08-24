@@ -3,13 +3,13 @@ using Alienlab.WPF.Helpers;
 using FileInfoMagic.Infrastructure;
 using FileInfoMagic.Services.Interfaces;
 using FileInfoMagic.Infrastructure.ViewModels;
-using FileInfoMagic.ValidationRules;
 using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using WinForm = System.Windows.Forms;
 using Unity;
+using FileInfoMagic.Models;
 
 namespace FileInfoMagic.ViewModels
 {
@@ -164,6 +164,7 @@ namespace FileInfoMagic.ViewModels
                 ModifiedDateTime = editorService.GetLastWriteTime(selectedPath).ToString();
                 AccessedDateTime = editorService.GetLastAccessTime(selectedPath).ToString();
                 TabHeader = $"{Path.GetFileName(selectedPath)}";
+                eventAggregator.PublishEvent(new StatusUpdateEventArgs("Loaded"));
             }
         }
 
@@ -200,14 +201,18 @@ namespace FileInfoMagic.ViewModels
                         editorService.SetLastWriteTime(selectedPath, modifiedTime);
                     if (DateTime.TryParse(AccessedDateTime, out DateTime accessedTime))
                         editorService.SetLastAccessTime(selectedPath, accessedTime);
+
+                    eventAggregator.PublishEvent(new StatusUpdateEventArgs("Saved"));
                     if (showPrompt)
-                        MessageBox.Show($"Changes saved to {TabName} {selectedPath}.", 
+                        MessageBox.Show($"Changes saved to {TabName} {selectedPath}.",
                             WinForm.Application.ProductName, MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {
+                    eventAggregator.PublishEvent(new StatusUpdateEventArgs("Error"));
                     if (showPrompt)
-                        MessageBox.Show($"Error while saving to {selectedPath}.\n{ex.Message}", WinForm.Application.ProductName, MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show($"Error while saving to {selectedPath}.\n{ex.Message}",
+                            WinForm.Application.ProductName, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }

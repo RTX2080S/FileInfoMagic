@@ -8,6 +8,7 @@
         xmlns:views="clr-namespace:FileInfoMagic.Views"        
         mc:Ignorable="d"
         Drop="Window_Drop" AllowDrop="True"
+        Loaded="Window_Loaded"
         Title="{Binding WindowTitle}" MinHeight="360" MinWidth="600" Width="600" Height="360"
         DataContext="{DynamicResource WindowViewModel}">
     <Window.InputBindings>
@@ -22,9 +23,11 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
         <views:ToolbarTrayView Grid.Row="0" />
         <views:MainView Grid.Row="1" />
+        <views:StatusBarView Grid.Row="2" />
     </Grid>
 </Window>

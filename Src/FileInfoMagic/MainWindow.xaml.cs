@@ -20,5 +20,10 @@ namespace FileInfoMagic
             var dataObject = e.Data as DataObject;
             ViewModel.OnFileDropped(dataObject);
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            ViewModel.OnWindowLoaded();
+        }
     }
 }

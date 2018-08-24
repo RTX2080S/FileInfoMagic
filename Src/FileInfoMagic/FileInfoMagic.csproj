@@ -96,6 +96,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\FileDroppedEventArgs.cs" />
+    <Compile Include="Models\StatusUpdateEventArgs.cs" />
     <Compile Include="Models\ToolbarCommand.cs" />
     <Compile Include="Models\ToolbarCommandEventArgs.cs" />
     <Compile Include="ValidationRules\DateTimeHelper.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="ViewModels\FileTabViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\StatusBarViewModel.cs" />
     <Compile Include="ViewModels\TabBaseViewModel.cs" />
     <Compile Include="ValidationRules\DateTimeValidationRule.cs" />
     <Compile Include="ViewModels\TabPageTemplateSelector.cs" />
@@ -115,6 +117,9 @@
     </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StatusBarView.xaml.cs">
+      <DependentUpon>StatusBarView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TabBaseView.xaml.cs">
       <DependentUpon>TabBaseView.xaml</DependentUpon>
@@ -147,6 +152,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StatusBarView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
