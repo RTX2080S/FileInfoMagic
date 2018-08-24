@@ -4,7 +4,6 @@ using FileInfoMagic.Models;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Windows;
 
 namespace FileInfoMagic.ViewModels
 {
@@ -138,7 +137,6 @@ namespace FileInfoMagic.ViewModels
                     this.TryLoadFileInNewTab(startupArgs[i]);
             }
 
-            // If nothing is loaded
             if (TabPages.Count == 0)
                 this.AddDefaultTabs();
 
