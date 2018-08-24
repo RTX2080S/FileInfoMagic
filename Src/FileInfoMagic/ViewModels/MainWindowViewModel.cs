@@ -1,6 +1,8 @@
-﻿using FileInfoMagic.Infrastructure.ViewModels;
+﻿using Alienlab.WPF.Helpers;
+using FileInfoMagic.Infrastructure.ViewModels;
 using FileInfoMagic.Models;
 using System.Windows;
+using System.Windows.Input;
 using WinForm = System.Windows.Forms;
 
 namespace FileInfoMagic.ViewModels
@@ -15,6 +17,22 @@ namespace FileInfoMagic.ViewModels
             {
                 var droppedFiles = dataObject.GetFileDropList();
                 eventAggregator.PublishEvent(new FileDroppedEventArgs(droppedFiles));
+            }
+        }
+
+        private ICommand saveCommand;
+
+        private void executeSaveCommand()
+        {
+            eventAggregator.PublishEvent(new ToolbarCommandEventArgs(ToolbarCommand.Save));
+        }
+
+        public ICommand SaveCommand
+        {
+            get
+            {
+                saveCommand = saveCommand ?? new RelayCommand(param => executeSaveCommand());
+                return saveCommand;
             }
         }
     }

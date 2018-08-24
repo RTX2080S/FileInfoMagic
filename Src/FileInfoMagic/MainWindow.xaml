@@ -8,8 +8,12 @@
         xmlns:views="clr-namespace:FileInfoMagic.Views"        
         mc:Ignorable="d"
         Drop="Window_Drop" AllowDrop="True"
-        Title="{Binding WindowTitle}" MinHeight="360" MinWidth="600" Width="600" Height="500"
+        Title="{Binding WindowTitle}" MinHeight="360" MinWidth="600" Width="600" Height="360"
         DataContext="{DynamicResource WindowViewModel}">
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Ctrl" Key="S" Command="{Binding SaveCommand}"/>
+    </Window.InputBindings>
+
     <Window.Resources>
         <vm:MainWindowViewModel x:Key="WindowViewModel" />
     </Window.Resources>

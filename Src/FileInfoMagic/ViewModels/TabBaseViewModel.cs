@@ -3,6 +3,7 @@ using Alienlab.WPF.Helpers;
 using FileInfoMagic.Infrastructure;
 using FileInfoMagic.Services.Interfaces;
 using FileInfoMagic.Infrastructure.ViewModels;
+using FileInfoMagic.ValidationRules;
 using System;
 using System.IO;
 using System.Windows;
@@ -182,9 +183,17 @@ namespace FileInfoMagic.ViewModels
             }
         }
 
+        protected bool CanSave()
+        {
+            return DateTimeHelper.IsValidDateTimeString(CreatedDateTime) &&
+                DateTimeHelper.IsValidDateTimeString(ModifiedDateTime) &&
+                DateTimeHelper.IsValidDateTimeString(AccessedDateTime);
+        }
+
         public void Save()
         {
-            this.SavePath(CurrentPath);
+            if (this.CanSave())
+                this.SavePath(CurrentPath);
         }
 
         protected void SavePath(string selectedPath)
