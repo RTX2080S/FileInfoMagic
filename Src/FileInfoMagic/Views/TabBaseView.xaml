@@ -78,7 +78,7 @@
         </TextBox>
 
         <StackPanel Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Margin="5" Content="Save" Command="{Binding SaveCommand}">
+            <Button Margin="5" Content="OK" Command="{Binding SaveCommand}">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ControlButton}">
                         <Setter Property="IsEnabled" Value="false" />
@@ -96,7 +96,7 @@
                 </Button.Style>
             </Button>
 
-            <Button Style="{StaticResource ControlButton}" Margin="5" Content="Close" Command="{Binding CloseCommand}" />
+            <Button Style="{StaticResource ControlButton}" Margin="5" Content="Cancel" Command="{Binding CloseCommand}" />
         </StackPanel>
     </Grid>
 </UserControl>
