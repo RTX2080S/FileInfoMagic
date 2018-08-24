@@ -171,7 +171,7 @@ namespace FileInfoMagic.ViewModels
 
         private void executeSaveCommand()
         {
-            this.Save();
+            this.Save(true);
         }
 
         public ICommand SaveCommand
@@ -183,12 +183,12 @@ namespace FileInfoMagic.ViewModels
             }
         }
 
-        public void Save()
+        public void Save(bool showPrompt = false)
         {
-            this.SavePath(CurrentPath);
+            this.SavePath(CurrentPath, showPrompt);
         }
 
-        protected void SavePath(string selectedPath)
+        protected void SavePath(string selectedPath, bool showPrompt)
         {
             if (!string.IsNullOrWhiteSpace(selectedPath) && editorService.Exists(selectedPath))
             {
@@ -200,11 +200,14 @@ namespace FileInfoMagic.ViewModels
                         editorService.SetLastWriteTime(selectedPath, modifiedTime);
                     if (DateTime.TryParse(AccessedDateTime, out DateTime accessedTime))
                         editorService.SetLastAccessTime(selectedPath, accessedTime);
-                    MessageBox.Show($"Changes saved to {TabName} {selectedPath}.", WinForm.Application.ProductName, MessageBoxButton.OK, MessageBoxImage.Information);
+                    if (showPrompt)
+                        MessageBox.Show($"Changes saved to {TabName} {selectedPath}.", 
+                            WinForm.Application.ProductName, MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Error while saving to {selectedPath}.\n{ex.Message}", WinForm.Application.ProductName, MessageBoxButton.OK, MessageBoxImage.Error);
+                    if (showPrompt)
+                        MessageBox.Show($"Error while saving to {selectedPath}.\n{ex.Message}", WinForm.Application.ProductName, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
