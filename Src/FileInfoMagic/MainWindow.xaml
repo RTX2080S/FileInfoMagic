@@ -15,6 +15,12 @@
     </Window.Resources>
 
     <Grid>
-        <views:MainView />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <views:ToolbarTrayView Grid.Row="0" />
+        <views:MainView Grid.Row="1" />
     </Grid>
 </Window>

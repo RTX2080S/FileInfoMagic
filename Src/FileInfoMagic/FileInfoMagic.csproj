@@ -103,6 +103,7 @@
     <Compile Include="ViewModels\TabBaseViewModel.cs" />
     <Compile Include="ValidationRules\DateTimeValidationRule.cs" />
     <Compile Include="ViewModels\TabPageTemplateSelector.cs" />
+    <Compile Include="ViewModels\ToolbarTrayViewModel.cs" />
     <Compile Include="Views\DirectoryTabView.xaml.cs">
       <DependentUpon>DirectoryTabView.xaml</DependentUpon>
     </Compile>
@@ -114,6 +115,9 @@
     </Compile>
     <Compile Include="Views\TabBaseView.xaml.cs">
       <DependentUpon>TabBaseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ToolbarTrayView.xaml.cs">
+      <DependentUpon>ToolbarTrayView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -144,6 +148,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\TabBaseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ToolbarTrayView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -189,6 +197,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\MainIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Help_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\save_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\save_all_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\open_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\new_16.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
