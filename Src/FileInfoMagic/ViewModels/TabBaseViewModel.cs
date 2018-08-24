@@ -53,6 +53,8 @@ namespace FileInfoMagic.ViewModels
 
         public string PathLabel => $"{TabName} Path";
 
+        public string CurrentPath { get; set; }
+
         private string targetPath;
 
         public string TargetPath
@@ -117,8 +119,7 @@ namespace FileInfoMagic.ViewModels
 
         private void executeBrowseCommand()
         {
-            var selectedPath = dialogService.BrowsePath();
-            this.LoadPath(selectedPath);
+            this.Browse();
         }
 
         public ICommand BrowseCommand
@@ -128,6 +129,12 @@ namespace FileInfoMagic.ViewModels
                 browseCommand = browseCommand ?? new RelayCommand(param => executeBrowseCommand(), param => true);
                 return browseCommand;
             }
+        }
+
+        public void Browse()
+        {
+            var selectedPath = dialogService.BrowsePath();
+            this.LoadPath(selectedPath);
         }
 
         private ICommand loadCommand;
@@ -150,6 +157,7 @@ namespace FileInfoMagic.ViewModels
         {
             if (!string.IsNullOrWhiteSpace(selectedPath) && editorService.Exists(selectedPath))
             {
+                CurrentPath = selectedPath;
                 TargetPath = selectedPath;
                 CreatedDateTime = editorService.GetCreationTime(selectedPath).ToString();
                 ModifiedDateTime = editorService.GetLastWriteTime(selectedPath).ToString();
@@ -162,7 +170,7 @@ namespace FileInfoMagic.ViewModels
 
         private void executeSaveCommand()
         {
-            this.SavePath(TargetPath);
+            this.Save();
         }
 
         public ICommand SaveCommand
@@ -174,7 +182,12 @@ namespace FileInfoMagic.ViewModels
             }
         }
 
-        public void SavePath(string selectedPath)
+        public void Save()
+        {
+            this.SavePath(CurrentPath);
+        }
+
+        protected void SavePath(string selectedPath)
         {
             if (!string.IsNullOrWhiteSpace(selectedPath) && editorService.Exists(selectedPath))
             {

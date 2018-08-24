@@ -30,6 +30,9 @@ namespace FileInfoMagic.ViewModels
             }
         }
 
+        public TabBaseViewModel CurrentTab =>
+            (TabPages.Count > 0 && TabIndex < TabPages.Count) ? TabPages[TabIndex] : null;
+
         private int tabIndex;
 
         public int TabIndex
@@ -98,12 +101,18 @@ namespace FileInfoMagic.ViewModels
             switch (e.Command)
             {
                 case ToolbarCommand.New:
+                    CreateFileTab();
+                    SwitchToLastTab();
                     break;
                 case ToolbarCommand.Open:
+                    CurrentTab?.Browse();
                     break;
                 case ToolbarCommand.Save:
+                    CurrentTab?.Save();
                     break;
                 case ToolbarCommand.SaveAll:
+                    foreach (var tab in TabPages)
+                        tab?.Save();
                     break;
                 default:
                     break;
