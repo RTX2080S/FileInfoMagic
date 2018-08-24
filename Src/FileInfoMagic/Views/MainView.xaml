@@ -32,7 +32,9 @@
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Focusable="True" FocusManager.IsFocusScope="True" Text="{Binding TabHeader}"/>
-                        <Button Margin="5,0,0,0" Command="{Binding CloseCommand}">X</Button>
+                        <Button Margin="5,0,0,0" Padding="-1" Command="{Binding CloseCommand}">
+                            <Image Source="/FileInfoMagic;component/Resources/close_16.png"/>
+                        </Button>
                     </StackPanel>
                 </DataTemplate>
             </TabControl.ItemTemplate>
