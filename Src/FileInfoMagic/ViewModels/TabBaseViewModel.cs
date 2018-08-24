@@ -154,7 +154,7 @@ namespace FileInfoMagic.ViewModels
                 CreatedDateTime = editorService.GetCreationTime(selectedPath).ToString();
                 ModifiedDateTime = editorService.GetLastWriteTime(selectedPath).ToString();
                 AccessedDateTime = editorService.GetLastAccessTime(selectedPath).ToString();
-                TabHeader = $"{Path.GetFileName(selectedPath)} - {TabName}";
+                TabHeader = $"{Path.GetFileName(selectedPath)}";
             }
         }
 
