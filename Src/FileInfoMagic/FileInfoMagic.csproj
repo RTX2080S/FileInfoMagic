@@ -96,6 +96,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\FileDroppedEventArgs.cs" />
+    <Compile Include="Models\ToolbarCommand.cs" />
+    <Compile Include="Models\ToolbarCommandEventArgs.cs" />
     <Compile Include="ViewModels\DirectoryTabViewModel.cs" />
     <Compile Include="ViewModels\FileTabViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -212,6 +214,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\new_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\close_16.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

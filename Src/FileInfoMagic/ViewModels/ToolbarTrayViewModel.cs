@@ -1,14 +1,79 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using System.Text;
 using WinForm = System.Windows.Forms;
 using Alienlab.WPF.Helpers;
 using FileInfoMagic.Infrastructure.ViewModels;
-using System.Text;
+using FileInfoMagic.Models;
 
 namespace FileInfoMagic.ViewModels
 {
     public class ToolbarTrayViewModel : CommonViewModel
     {
+        private ICommand newCommand;
+
+        private void executeNewCommand()
+        {
+            eventAggregator.PublishEvent(new ToolbarCommandEventArgs(ToolbarCommand.New));
+        }
+
+        public ICommand NewCommand
+        {
+            get
+            {
+                newCommand = newCommand ?? new RelayCommand(param => executeNewCommand());
+                return newCommand;
+            }
+        }
+
+        private ICommand openCommand;
+
+        private void executeOpenCommand()
+        {
+            eventAggregator.PublishEvent(new ToolbarCommandEventArgs(ToolbarCommand.Open));
+        }
+
+        public ICommand OpenCommand
+        {
+            get
+            {
+                openCommand = openCommand ?? new RelayCommand(param => executeOpenCommand());
+                return openCommand;
+            }
+        }
+
+        private ICommand saveCommand;
+
+        private void executeSaveCommand()
+        {
+            eventAggregator.PublishEvent(new ToolbarCommandEventArgs(ToolbarCommand.Save));
+        }
+
+        public ICommand SaveCommand
+        {
+            get
+            {
+                saveCommand = saveCommand ?? new RelayCommand(param => executeSaveCommand());
+                return saveCommand;
+            }
+        }
+
+        private ICommand saveAllCommand;
+
+        private void executeSaveAllCommand()
+        {
+            eventAggregator.PublishEvent(new ToolbarCommandEventArgs(ToolbarCommand.SaveAll));
+        }
+
+        public ICommand SaveAllCommand
+        {
+            get
+            {
+                saveAllCommand = saveAllCommand ?? new RelayCommand(param => executeSaveAllCommand());
+                return saveAllCommand;
+            }
+        }
+
         private ICommand aboutCommand;
 
         private void executeAboutCommand()

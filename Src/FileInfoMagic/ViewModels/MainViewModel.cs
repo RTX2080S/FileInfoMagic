@@ -6,7 +6,7 @@ using System.IO;
 
 namespace FileInfoMagic.ViewModels
 {
-    public class MainViewModel : CommonViewModel, ISubscriber<FileDroppedEventArgs>
+    public class MainViewModel : CommonViewModel, ISubscriber<FileDroppedEventArgs>, ISubscriber<ToolbarCommandEventArgs>
     {
         public MainViewModel()
         {
@@ -57,22 +57,56 @@ namespace FileInfoMagic.ViewModels
                 TabPages.Remove(tab);
         }
 
+        protected void SwitchToLastTab()
+        {
+            TabIndex = TabPages.Count - 1;
+        }
+
+        protected FileTabViewModel CreateFileTab()
+        {
+            var fileTab = FileTabViewModel.Create(this);
+            this.AddTab(fileTab);
+            return fileTab;
+        }
+
+        protected DirectoryTabViewModel CreateDirectoryTab()
+        {
+            var dirTab = DirectoryTabViewModel.Create(this);
+            this.AddTab(dirTab);
+            return dirTab;
+        }
+
         public void OnEventHandler(FileDroppedEventArgs e)
         {
-            var firstFile = e.FileDropList[0];
-            if (!string.IsNullOrWhiteSpace(firstFile) && File.Exists(firstFile))
+            foreach (var file in e.FileDropList)
             {
-                var fileTab = new FileTabViewModel(this);
-                fileTab.LoadPath(firstFile);
-                this.AddTab(fileTab);
-                TabIndex = TabPages.Count - 1;
+                if (!string.IsNullOrWhiteSpace(file) && File.Exists(file))
+                {
+                    var fileTab = this.CreateFileTab();
+                    fileTab.LoadPath(file);
+                }
+                else if (!string.IsNullOrWhiteSpace(file) && Directory.Exists(file))
+                {
+                    var dirTab = this.CreateDirectoryTab();
+                    dirTab.LoadPath(file);
+                }
             }
-            else if (!string.IsNullOrWhiteSpace(firstFile) && Directory.Exists(firstFile))
+        }
+
+        public void OnEventHandler(ToolbarCommandEventArgs e)
+        {
+            switch (e.Command)
             {
-                var dirTab = new DirectoryTabViewModel(this);
-                dirTab.LoadPath(firstFile);
-                this.AddTab(dirTab);
-                TabIndex = TabPages.Count - 1;
+                case ToolbarCommand.New:
+                    break;
+                case ToolbarCommand.Open:
+                    break;
+                case ToolbarCommand.Save:
+                    break;
+                case ToolbarCommand.SaveAll:
+                    break;
+                default:
+                    break;
             }
         }
     }

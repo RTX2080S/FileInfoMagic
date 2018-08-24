@@ -22,16 +22,16 @@
 
         <ToolBarTray Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left">
             <ToolBar>
-                <Button ToolTip="New">
+                <Button ToolTip="New" Command="{Binding NewCommand}">
                     <Image Source="/FileInfoMagic;component/Resources/new_16.png"/>
                 </Button>
-                <Button ToolTip="Open">
+                <Button ToolTip="Open" Command="{Binding OpenCommand}">
                     <Image Source="/FileInfoMagic;component/Resources/open_16.png"/>
                 </Button>
-                <Button ToolTip="Save">
+                <Button ToolTip="Save" Command="{Binding SaveCommand}">
                     <Image Source="/FileInfoMagic;component/Resources/save_16.png"/>
                 </Button>
-                <Button ToolTip="Save All">
+                <Button ToolTip="Save All" Command="{Binding SaveAllCommand}">
                     <Image Source="/FileInfoMagic;component/Resources/save_all_16.png"/>
                 </Button>
             </ToolBar>
