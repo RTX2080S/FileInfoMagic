@@ -13,7 +13,7 @@ namespace FileInfoMagic.ViewModels
 
         public void OnWindowLoaded()
         {
-            eventAggregator.PublishEvent(new StatusUpdateEventArgs("Ready"));
+            eventAggregator.PublishEvent(new WindowLoadedEventArgs());
         }
 
         public void OnFileDropped(DataObject dataObject)

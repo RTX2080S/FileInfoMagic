@@ -99,6 +99,7 @@
     <Compile Include="Models\StatusUpdateEventArgs.cs" />
     <Compile Include="Models\ToolbarCommand.cs" />
     <Compile Include="Models\ToolbarCommandEventArgs.cs" />
+    <Compile Include="Models\WindowLoadedEventArgs.cs" />
     <Compile Include="ValidationRules\DateTimeHelper.cs" />
     <Compile Include="ViewModels\DirectoryTabViewModel.cs" />
     <Compile Include="ViewModels\FileTabViewModel.cs" />

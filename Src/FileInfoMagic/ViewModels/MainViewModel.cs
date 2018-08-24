@@ -1,18 +1,19 @@
 ﻿using Alienlab.Practices.Utilities;
 using FileInfoMagic.Infrastructure.ViewModels;
 using FileInfoMagic.Models;
+using System;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Windows;
 
 namespace FileInfoMagic.ViewModels
 {
-    public class MainViewModel : CommonViewModel, ISubscriber<FileDroppedEventArgs>, ISubscriber<ToolbarCommandEventArgs>
+    public class MainViewModel : CommonViewModel, ISubscriber<FileDroppedEventArgs>,
+        ISubscriber<ToolbarCommandEventArgs>, ISubscriber<WindowLoadedEventArgs>
     {
         public MainViewModel()
         {
             TabPages = new ObservableCollection<TabBaseViewModel>();
-            this.AddTab(new FileTabViewModel(this));
-            this.AddTab(new DirectoryTabViewModel(this));
         }
 
         private ObservableCollection<TabBaseViewModel> tabPages;
@@ -79,21 +80,24 @@ namespace FileInfoMagic.ViewModels
             return dirTab;
         }
 
+        protected void TryLoadFileInNewTab(string file)
+        {
+            if (!string.IsNullOrWhiteSpace(file) && File.Exists(file))
+            {
+                var fileTab = this.CreateFileTab();
+                fileTab.LoadPath(file);
+            }
+            else if (!string.IsNullOrWhiteSpace(file) && Directory.Exists(file))
+            {
+                var dirTab = this.CreateDirectoryTab();
+                dirTab.LoadPath(file);
+            }
+        }
+
         public void OnEventHandler(FileDroppedEventArgs e)
         {
             foreach (var file in e.FileDropList)
-            {
-                if (!string.IsNullOrWhiteSpace(file) && File.Exists(file))
-                {
-                    var fileTab = this.CreateFileTab();
-                    fileTab.LoadPath(file);
-                }
-                else if (!string.IsNullOrWhiteSpace(file) && Directory.Exists(file))
-                {
-                    var dirTab = this.CreateDirectoryTab();
-                    dirTab.LoadPath(file);
-                }
-            }
+                this.TryLoadFileInNewTab(file);
         }
 
         public void OnEventHandler(ToolbarCommandEventArgs e)
@@ -117,6 +121,23 @@ namespace FileInfoMagic.ViewModels
                 default:
                     break;
             }
+        }
+
+        public void OnEventHandler(WindowLoadedEventArgs e)
+        {
+            var startupArgs = Environment.GetCommandLineArgs();
+            if (startupArgs.Length <= 1)
+            {
+                this.AddTab(new FileTabViewModel(this));
+                this.AddTab(new DirectoryTabViewModel(this));
+            }
+            else
+            {
+                for (int i = 1; i < startupArgs.Length; i++)
+                    this.TryLoadFileInNewTab(startupArgs[i]);
+            }
+
+            eventAggregator.PublishEvent(new StatusUpdateEventArgs("Ready"));
         }
     }
 }
