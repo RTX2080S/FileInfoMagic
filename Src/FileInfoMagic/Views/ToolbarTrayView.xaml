@@ -25,6 +25,10 @@
                 <Button ToolTip="New" Command="{Binding NewCommand}">
                     <Image Source="/FileInfoMagic;component/Resources/new_16.png"/>
                 </Button>
+                <ComboBox SelectedIndex="{Binding TargetType}">
+                    <ComboBoxItem IsSelected="True">File</ComboBoxItem>
+                    <ComboBoxItem>Directory</ComboBoxItem>
+                </ComboBox>
                 <Button ToolTip="Open" Command="{Binding OpenCommand}">
                     <Image Source="/FileInfoMagic;component/Resources/open_16.png"/>
                 </Button>

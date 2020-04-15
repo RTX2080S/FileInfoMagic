@@ -14,7 +14,7 @@ namespace FileInfoMagic.ViewModels
 
         private void executeNewCommand()
         {
-            eventAggregator.PublishEvent(new ToolbarCommandEventArgs(ToolbarCommand.New));
+            eventAggregator.PublishEvent(new ToolbarCommandEventArgs((ToolbarCommand)TargetType));
         }
 
         public ICommand NewCommand
@@ -93,6 +93,21 @@ namespace FileInfoMagic.ViewModels
             {
                 aboutCommand = aboutCommand ?? new RelayCommand(param => executeAboutCommand());
                 return aboutCommand;
+            }
+        }
+
+        private int targetType;
+
+        public int TargetType
+        {
+            get
+            {
+                return targetType;
+            }
+            set
+            {
+                targetType = value;
+                OnPropertyChanged(nameof(TargetType));
             }
         }
     }

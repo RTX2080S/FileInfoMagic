@@ -3,9 +3,10 @@ namespace FileInfoMagic.Models
 {
     public enum ToolbarCommand : int
     {
-        New = 0,
-        Open = 1,
-        Save = 2,
-        SaveAll = 3
+        NewFile = 0,
+        NewDir = 1,
+        Open = 2,
+        Save = 3,
+        SaveAll = 4
     }
 }

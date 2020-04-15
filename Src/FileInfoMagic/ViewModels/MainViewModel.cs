@@ -109,8 +109,12 @@ namespace FileInfoMagic.ViewModels
         {
             switch (e.Command)
             {
-                case ToolbarCommand.New:
+                case ToolbarCommand.NewFile:
                     CreateFileTab();
+                    SwitchToLastTab();
+                    break;
+                case ToolbarCommand.NewDir:
+                    CreateDirectoryTab();
                     SwitchToLastTab();
                     break;
                 case ToolbarCommand.Open:

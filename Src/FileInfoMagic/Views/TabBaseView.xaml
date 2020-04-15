@@ -77,7 +77,7 @@
             </TextBox.Text>
         </TextBox>
 
-        <StackPanel Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Right">
+        <StackPanel Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Right" Visibility="Collapsed">
             <Button Margin="5" Content="OK" Command="{Binding SaveCommand}">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ControlButton}">
